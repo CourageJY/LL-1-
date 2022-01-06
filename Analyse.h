@@ -3,6 +3,8 @@
 #include <map>
 #include <set>
 #include <string>
+#include <stack>
+#include <vector>
 #include "Grammer.h"
 #include "Table.h"
 
@@ -19,7 +21,17 @@ public:
      * @return false 判断失败
      */
     bool AnalyseSequence(Grammer& G,Table& T,string sq);
+    int isInT(char ch);
+
 
 private:
-
+    stack<char> ST;
+    string str;
+    Analyse(string _str){
+        str=_str;
+        str += '$';
+        ST.push('$');
+//        //文法开始符号
+//        ST.push(grammar.N[0]);
+    }
 };
