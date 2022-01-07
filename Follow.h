@@ -14,19 +14,17 @@ public:
      * 输入：文法Grammar
      * 输出：内部映射表FOLLOW
      */
-    void getFollow(Grammar& G);
+    void generateFollow(Grammar& G);
 
     //打印结果
-    void printAns();
-    
+    void printFollow(Grammar &G);
+
+    const map<char, set<char>> &getFollow() const;
+
 private:
     //用以储存FIRST集合的映射表
     map<char,set<char>> FOLLOW;
 
     friend class Table;
 
-public:
-    const map<char, set<char>> &getFollow1() const;
-
-    void setFollow(const map<char, set<char>> &follow);
 };

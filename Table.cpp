@@ -4,8 +4,8 @@
 
 void Table::getTable(Grammar &G, First &ft, Follow &fw) {
 
-    map<char,set<char> >FIRST = ft.getFirst1();
-    map<char,set<char> >FOLLOW = fw.getFollow1();
+    map<char,set<char> >FIRST = ft.getFirst();
+    map<char,set<char> >FOLLOW = fw.getFollow();
     set<char>Vn = Grammar().getVn(); // 非终结符
     set<char>Vt = Grammar().getVt(); // 终结符
 

@@ -16,11 +16,9 @@ public:
      */
     void generateFirst(Grammar& G);
 
-    void printFirst();
+    void printFirst(Grammar &G);
 
     const map<char, set<char>> &getFirst() const;
-
-    void setFirst(const map<char, set<char>> &first);
 
 private:
     //用以储存FIRST集合的映射表
