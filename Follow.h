@@ -3,7 +3,7 @@
 #include <map>
 #include <set>
 #include <string>
-#include "Grammer.h"
+#include "Grammar.h"
 
 using namespace std;
 
@@ -11,10 +11,10 @@ class First{
 public:
     /**
      * 用以得到Follow集合的函数
-     * 输入：文法Grammer
+     * 输入：文法Grammar
      * 输出：内部映射表FOLLOW
      */
-    void getFollow(Grammer& G);
+    void getFollow(Grammar& G);
 
     //打印结果
     void printAns();

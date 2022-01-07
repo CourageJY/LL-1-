@@ -1,6 +1,6 @@
 #include "Analyse.h"
 
-bool Analyse::AnalyseSequence(Grammer &G, Table &T, string sq) {
+bool Analyse::AnalyseSequence(Grammar &G, Table &T, string sq) {
     /* 指向当前字符 */
     int ip = 0;
     /* 栈顶符号X， 和当前输入符号a */

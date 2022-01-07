@@ -5,7 +5,7 @@
 #include <string>
 #include <stack>
 #include <vector>
-#include "Grammer.h"
+#include "Grammar.h"
 #include "Table.h"
 
 using namespace std;
@@ -20,7 +20,7 @@ public:
      * @return true 判断成功，并打印出分析过程（涉及到的文法序列）
      * @return false 判断失败
      */
-    bool AnalyseSequence(Grammer& G,Table& T,string sq);
+    bool AnalyseSequence(Grammar& G,Table& T,string sq);
     int isInT(char ch);
 
 

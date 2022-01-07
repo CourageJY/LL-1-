@@ -3,7 +3,7 @@
 #include <map>
 #include <set>
 #include <string>
-#include <Grammer.h>
+#include <Grammar.h>
 #include <First.h>
 #include <Follow.h>
 
@@ -18,7 +18,7 @@ public:
      * @param ft first集
      * @param fw follow集
      */
-    void getTable(Grammer& G,First& ft,First& fw);
+    void getTable(Grammar& G,First& ft,First& fw);
 
 private:
     /**

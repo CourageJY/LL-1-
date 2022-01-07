@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class Grammer{
+class Grammar{
 public:
     //用以处理文法输入的函数
     void inputGrammer();

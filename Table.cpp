@@ -2,7 +2,7 @@
 #include <iomanip>
 #include "Table.h"
 
-void Table::getTable(Grammer &G, First &ft, First &fw) {
+void Table::getTable(Grammar &G, First &ft, First &fw) {
 
     map<char,set<char> >FIRST;
     map<char,set<char> >FOLLOW;
