@@ -14,13 +14,14 @@ public:
      * 输入：文法Grammar
      * 输出：内部映射表FIRST
      */
-    void getFirst(Grammar& G);
+    void generateFirst(Grammar& G);
 
-    // return FIRST
-    const map<char, set<char>> &getFirst1() const;
+    void printFirst();
 
-    void printAns();
-    
+    const map<char, set<char>> &getFirst() const;
+
+    void setFirst(const map<char, set<char>> &first);
+
 private:
     //用以储存FIRST集合的映射表
     map<char,set<char>> FIRST;

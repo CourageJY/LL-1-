@@ -16,9 +16,6 @@ public:
      */
     void getFollow(Grammar& G);
 
-    // return FOLLOW
-    const map<char, set<char>> &getFollow1() const;
-
     //打印结果
     void printAns();
     
@@ -28,4 +25,8 @@ private:
 
     friend class Table;
 
+public:
+    const map<char, set<char>> &getFollow1() const;
+
+    void setFollow(const map<char, set<char>> &follow);
 };
