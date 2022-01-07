@@ -27,6 +27,14 @@ private:
      * value:key所对应的文法
      */
     map<string,string> Table;
+
+    //may be public
+    set<char>Vt_temp;
+    set<char>Vn;
+    set<char>Vt;
+    map<char, set<string> > P;
+    map<char,set<char> >FIRST;
+    map<char,set<char> >FOLLOW;
     
     friend class Analyse;
 };
