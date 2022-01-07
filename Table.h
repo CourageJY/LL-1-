@@ -30,11 +30,9 @@ private:
 
     //may be public
     set<char>Vt_temp;
-    set<char>Vn;
-    set<char>Vt;
-    map<char, set<string> > P;
-    map<char,set<char> >FIRST;
-    map<char,set<char> >FOLLOW;
+    set<char>Vn; // 非终结符
+    set<char>Vt; // 终结符
+    map<char, set<string> > P; //
     
     friend class Analyse;
 };

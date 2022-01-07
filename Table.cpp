@@ -4,6 +4,8 @@
 
 void Table::getTable(Grammer &G, First &ft, First &fw) {
 
+    map<char,set<char> >FIRST;
+    map<char,set<char> >FOLLOW;
 
     for (char c : Vt) {
         Vt_temp.insert(c);
