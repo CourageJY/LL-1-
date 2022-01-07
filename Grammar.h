@@ -9,7 +9,7 @@ using namespace std;
 class Grammar{
 public:
     //用以处理文法输入的函数
-    void inputGrammer();
+    void inputGrammar();
 
     //用以消除左递归的函数
     void removeLeftRecursion();
@@ -18,7 +18,13 @@ public:
     void removeLeftFactor(); 
     
     //打印出LL(1)文法
-    void printAns();   
+    void printAns();
+
+    // return Vn
+    const set<char> &getVn() const;
+
+    // return Vt
+    const set<char> &getVt() const;
     
 private:
     //开始符

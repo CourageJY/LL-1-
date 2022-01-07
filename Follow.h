@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class First{
+class Follow{
 public:
     /**
      * 用以得到Follow集合的函数
@@ -15,6 +15,9 @@ public:
      * 输出：内部映射表FOLLOW
      */
     void getFollow(Grammar& G);
+
+    // return FOLLOW
+    const map<char, set<char>> &getFollow1() const;
 
     //打印结果
     void printAns();

@@ -16,6 +16,9 @@ public:
      */
     void getFirst(Grammar& G);
 
+    // return FIRST
+    const map<char, set<char>> &getFirst1() const;
+
     void printAns();
     
 private:

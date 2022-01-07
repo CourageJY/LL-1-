@@ -18,7 +18,7 @@ public:
      * @param ft first集
      * @param fw follow集
      */
-    void getTable(Grammar& G,First& ft,First& fw);
+    void getTable(Grammar& G,First& ft,Follow& fw);
 
 private:
     /**
@@ -30,8 +30,7 @@ private:
 
     //may be public
     set<char>Vt_temp;
-    set<char>Vn; // 非终结符
-    set<char>Vt; // 终结符
+
     map<char, set<string> > P; //
     
     friend class Analyse;

@@ -2,10 +2,12 @@
 #include <iomanip>
 #include "Table.h"
 
-void Table::getTable(Grammar &G, First &ft, First &fw) {
+void Table::getTable(Grammar &G, First &ft, Follow &fw) {
 
-    map<char,set<char> >FIRST;
-    map<char,set<char> >FOLLOW;
+    map<char,set<char> >FIRST = ft.getFirst1();
+    map<char,set<char> >FOLLOW = fw.getFollow1();
+    set<char>Vn = Grammar().getVn(); // 非终结符
+    set<char>Vt = Grammar().getVt(); // 终结符
 
     for (char c : Vt) {
         Vt_temp.insert(c);
