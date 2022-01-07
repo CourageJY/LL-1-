@@ -7,7 +7,7 @@
 #include <First.h>
 #include <Follow.h>
 
-use namespace std;
+using namespace std;
 
 class Table{
 public:
@@ -29,4 +29,4 @@ private:
     map<string,string> Table;
     
     friend class Analyse;
-}
+};
