@@ -4,10 +4,10 @@
 
 void Table::getTable(Grammar &G, First &ft, Follow &fw) {
 
-    map<char,set<char> >FIRST = ft.getFirst();
-    map<char,set<char> >FOLLOW = fw.getFollow();
-    set<char>Vn = Grammar().getVn(); // 非终结符
-    set<char>Vt = Grammar().getVt(); // 终结符
+    map<char,set<char> > FIRST = ft.FIRST;
+    map<char,set<char> >FOLLOW = fw.FOLLOW;
+    set<char>Vn = G.Vn; // 非终结符
+    set<char>Vt = G.Vt; // 终结符
 
     for (char c : Vt) {
         Vt_temp.insert(c);
@@ -58,11 +58,16 @@ void Table::getTable(Grammar &G, First &ft, Follow &fw) {
             }
         }
     }
+}
 
+void Table::printTable(Grammar& G){
     /*
         显示Table
     */
-    cout << "显示table表：" << endl << endl;
+    set<char>Vn = G.getVn(); // 非终结符
+    set<char>Vt = G.getVt(); // 终结符
+
+    cout << "\n显示table表：" << endl;
     cout.setf(std::ios::left);
     for (auto it1 = Vt_temp.begin(); it1 != Vt_temp.end(); it1++) {
         if (it1 == Vt_temp.begin())cout << setw(10) << " ";

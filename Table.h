@@ -3,9 +3,9 @@
 #include <map>
 #include <set>
 #include <string>
-#include <Grammar.h>
-#include <First.h>
-#include <Follow.h>
+#include "Grammar.h"
+#include "First.h"
+#include "Follow.h"
 
 using namespace std;
 
@@ -19,6 +19,8 @@ public:
      * @param fw follow集
      */
     void getTable(Grammar& G,First& ft,Follow& fw);
+
+    void printTable(Grammar& G);
 
 private:
     /**

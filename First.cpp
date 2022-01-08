@@ -39,7 +39,7 @@ void First::generateFirst(Grammar &G) {
 
 void First::printFirst(Grammar &G) {
     //输出FIRST集
-    cout << "FIRST集为：" << endl << endl;
+    cout << "\nFIRST集为：" << endl;
     for (char cur_s: G.getVn()) {
         cout << "FIRST()   " << cur_s;
         for (char it1: FIRST[cur_s]) {

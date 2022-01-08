@@ -69,7 +69,7 @@ void Follow::generateFollow(Grammar &G) {
 
 void Follow::printFollow(Grammar &G) {
     //输出FOLLOW集
-    cout << "FOLLOW集为：" << endl << endl;
+    cout << "\nFOLLOW集为：" << endl;
     for (char cur_s : G.getVn()) {
         cout << "FOLLOW()  " << cur_s;
         for (char it1 : FOLLOW[cur_s]) {
