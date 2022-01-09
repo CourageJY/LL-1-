@@ -5,6 +5,9 @@
 #include <string>
 #include <stack>
 #include <vector>
+#include <iostream>
+#include <string>
+#include <iomanip>
 #include "Grammar.h"
 #include "Table.h"
 
@@ -22,18 +25,16 @@ public:
      */
     bool AnalyseSequence(Grammar& G,Table& T,string sq);
 
-    int isInT(char ch);
+    bool isInT(char ch,Grammar &G);
 
-    Analyse(string _str){
-        str=_str;
-        str += '$';
-        ST.push('$');
-//        //文法开始符号
-//        ST.push(grammar.N[0]);
-    }
+    void getFromTable(char A, char a, string &s ,Table &T);
+
+    void check(bool b);
 
 private:
     stack<char> ST;
-    string str;
 
+//    Grammar G;
+//    Table T;
+//    string sq;
 };

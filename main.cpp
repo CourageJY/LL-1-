@@ -34,11 +34,11 @@ int main(){
     table.printTable(G);
 
     //对输入的句子进行语法分析
-    Analyse analyse("");
+    Analyse analyse;
     cout<<"\n请输入您想要分析的句子：\n";
     string seq;
     cin>>seq;
-//    analyse.AnalyseSequence(G,table,seq);
+    analyse.check(analyse.AnalyseSequence(G, table, seq));
 
 
 }
