@@ -8,6 +8,7 @@ void Table::getTable(Grammar &G, First &ft, Follow &fw) {
     map<char,set<char> >FOLLOW = fw.FOLLOW;
     set<char>Vn = G.Vn; // 非终结符
     set<char>Vt = G.Vt; // 终结符
+    P=G.Gr;
 
     for (char c : Vt) {
         Vt_temp.insert(c);

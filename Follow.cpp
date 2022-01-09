@@ -71,7 +71,7 @@ void Follow::printFollow(Grammar &G) {
     //输出FOLLOW集
     cout << "\nFOLLOW集为：" << endl;
     for (char cur_s : G.getVn()) {
-        cout << "FOLLOW()  " << cur_s;
+        cout << "FOLLOW("<<cur_s << ")  ";
         for (char it1 : FOLLOW[cur_s]) {
             cout << "       " << it1;
         }

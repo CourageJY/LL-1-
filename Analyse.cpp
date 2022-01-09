@@ -1,11 +1,11 @@
 // #include "Analyse.h"
-
+//
 // bool Analyse::AnalyseSequence(Grammar &G, Table &T, string sq) {
 //     /* 指向当前字符 */
 //     int ip = 0;
 //     /* 栈顶符号X， 和当前输入符号a */
 //     char X, a;
-//     printf("The answer:\n");
+//     printf("\nThe answer:\n");
 //     do{
 //         X = ST.top();
 //         a = str[ip];
@@ -43,7 +43,7 @@
 //         }
 //     } while (X != '$');
 // }
-
+//
 // /* 判断ch是否是终结符 */
 // int Analyse::isInT(char ch)
 // {
