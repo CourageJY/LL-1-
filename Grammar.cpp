@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <vector>
 #include "Grammar.h"
 
 void Grammar::inputGrammar(){
@@ -74,23 +75,23 @@ void Grammar::printGrammar(){
 }
 
 void Grammar::removeLeftRecursion(){
-    string tempVn = "";//拼接所有非终结符
-    for (auto it = Vn.begin(); it != Vn.end(); it++){
-        tempVn += *it;
+    string tempVn;//拼接所有非终结符
+    for (char it : Vn){
+        tempVn += it;
     }
 
     for (int i = 0; i < tempVn.length(); i++){//非终结符使用默认排序
         char pi = tempVn[i];
         set<string> NewPRight;
         for (auto it = Gr[pi].begin(); it != Gr[pi].end(); it++){
-            bool isget = 0;//判断序列前是否有非终结符与首字符匹配
+            bool isget = false;//判断序列前是否有非终结符与首字符匹配
             string right = *it;
             for (int j = 0; j < i; j++){//找到之前的非终结符
                 char pj = tempVn[j];
                 if (pj == right[0]){//判断该产生式首字母是否为非终结符
-                    isget = 1;
-                    for (auto it1 = Gr[pj].begin(); it1 != Gr[pj].end(); it1++){
-                        string s = *it1 + right.substr(1);//拼接从1开始的子串
+                    isget = true;
+                    for (const auto & it1 : Gr[pj]){
+                        string s = it1 + right.substr(1);//拼接从1开始的子串
                         NewPRight.insert(s);
                     }
                 }
@@ -105,45 +106,80 @@ void Grammar::removeLeftRecursion(){
 }
 
 void Grammar::removeDirectLeftRecursion(char c){
-    char NewVn;
-        for (int i = 0; i < 26; i++) {
-            NewVn = i + 'A';
-            if (!Vn.count(NewVn)) {
-                break;
-            }
+    char NewVn=generateNewVn();//新终结符
+    bool isaddNewVn = false;
+    for (auto it = Gr[c].begin(); it != Gr[c].end(); it++) {
+        string right = *it;
+        if (right[0] == c) {
+            isaddNewVn = true;
+            break;
         }
-        bool isaddNewVn = 0;
+    }
+    if (isaddNewVn) {
+        set<string> NewPRight;
+        set<string> NewPNewVn;
         for (auto it = Gr[c].begin(); it != Gr[c].end(); it++) {
             string right = *it;
-            if (right[0] == c) {
-                isaddNewVn = 1;
-                break;
+            if (right[0] != c) {
+                right += NewVn;
+                NewPRight.insert(right);
+            } else {
+                right = right.substr(1);
+                right += NewVn;
+                NewPNewVn.insert(right);
             }
         }
-        if (isaddNewVn) {
-            set<string>NewPRight;
-            set<string>NewPNewVn;
-            for (auto it = Gr[c].begin(); it != Gr[c].end(); it++) {
-                string right = *it;
-                if (right[0] != c) {
-                    right += NewVn;
-                    NewPRight.insert(right);
-                }
-                else {
-                    right = right.substr(1);
-                    right += NewVn;
-                    NewPNewVn.insert(right);
-                }
-            }
-            Vn.insert(NewVn);
-            NewPNewVn.insert("@");
-            Gr[NewVn] = NewPNewVn;
-            Gr[c] = NewPRight;
-        }
+        Vn.insert(NewVn);
+        NewPNewVn.insert("@");
+        Gr[NewVn] = NewPNewVn;
+        Gr[c] = NewPRight;
+    }
 }
 
 //提取左公因子
 void Grammar::removeLeftFactor(){
+    string tempVn;//拼接所有非终结符
+    for (char it : Vn){
+        tempVn += it;
+    }
+
+    //全体产生式遍历
+    for(int i=0;i<tempVn.length();){
+        set<char> dup;//判重的集合
+        bool isDup= false;//判断是否有公因子
+        char c;//公共因子
+        for(auto& s:Gr[tempVn[i]]){
+            if(dup.count(s[0])){
+                isDup= true;
+                c=s[0];
+                break;
+            } else{
+                dup.insert(s[0]);
+            }
+        }
+        if(isDup){//有公因子
+            char newVn=generateNewVn();//新非终结符
+            Vn.insert(newVn);//插入
+            tempVn+=newVn;//拼接
+            vector<string> dels;//被删除的右部集
+            for(auto& s:Gr[tempVn[i]]){
+                if(s[0]==c){
+                    dels.push_back(s);
+                    Gr[newVn].insert(s.substr(1));//新非终结符插入
+                }
+            }
+            for(auto& s:dels){//原非终结符删除
+                Gr[tempVn[i]].erase(s);
+            }
+            string newRight;
+            newRight+=c;
+            newRight+=newVn;
+            Gr[tempVn[i]].insert(newRight);//原非终结符插入新右部
+        }
+        else{//无公因子则继续遍历
+            i++;
+        }
+    }
 
 }
 
@@ -153,6 +189,17 @@ char Grammar::getS() const {
 
 void Grammar::setS(char s) {
     S = s;
+}
+
+char Grammar::generateNewVn() {
+    char NewVn;
+    for (int i = 0; i < 26; i++) {
+        NewVn = i + 'A';
+        if (!Vn.count(NewVn)) {
+            break;
+        }
+    }
+    return NewVn;
 }
 
 const set<char> &Grammar::getVn() const {

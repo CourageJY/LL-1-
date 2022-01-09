@@ -17,6 +17,11 @@ int main(){
     cout<<"\n消除左递归后文法为：\n";
     G.removeLeftRecursion();
     G.printGrammar();
+
+    //提取左公因子
+    cout<<"\n消除左公因子后文法为：\n";
+    G.removeLeftFactor();
+    G.printGrammar();
     
     //计算first集合
     First first;

@@ -58,6 +58,9 @@ private:
 
     void removeDirectLeftRecursion(char c);
 
+    //生成新非终结符
+    char generateNewVn();
+
     friend class First;
 
     friend class Follow;
