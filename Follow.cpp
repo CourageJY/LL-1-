@@ -44,7 +44,7 @@ void Follow::generateFollow(Grammar &G) {
 
                 }
                 /*
-                AC/ACK为最后两个或者三个
+                B->AC/ACK为最后两个或者三个
                 B->AC
                 B->ACK(K的first集含有@)
                 将B的follow集加入到C的follow集
