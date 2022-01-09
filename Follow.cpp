@@ -10,8 +10,8 @@ const map<char, set<char>> &Follow::getFollow() const {
 
 void Follow::generateFollow(Grammar &G) {
     FOLLOW.clear();
+    //1. 对于文法的开始符号S,置#于Follow（S）中；
     FOLLOW[G.getS()].insert('#');
-    //判断迭代次数
     int iter = 4;
     auto *first = new First();
     first->generateFirst(G);
@@ -23,15 +23,16 @@ void Follow::generateFollow(Grammar &G) {
                 string cur_string = *it1;
                 for (int i = 0; i < cur_string.length() - 1; i++) {
                     /*
-                        B->Ac
-                        将c加到A的follow集
+                     2. 若A->αBβ是一个产生式，则把First(β) \ {ε} 加入到Follow（B）中
                     */
+
+                    //B->Ac 跟在后面的是终结符,将c加到A的follow集
                     if (isupper(cur_string[i]) && !isupper(cur_string[i + 1])) {
                         FOLLOW[cur_string[i]].insert(cur_string[i + 1]);
                     }
                     /*
                         B->AC
-                        将C的first集加到A的follow集
+                        跟在后面的是一个非终结符,将C的first集加到A的follow集
                     */
                     if (isupper(cur_string[i]) && isupper(cur_string[i + 1])) {
                         //遍历C的first去除@，加到A的follow集
@@ -44,6 +45,7 @@ void Follow::generateFollow(Grammar &G) {
 
                 }
                 /*
+                 * 3. 若A->αB是一个产生式，或A->αBβ是一个产生式且β=>ε，则把Follow(A)加入到Follow(B)中
                 B->AC/ACK为最后两个或者三个
                 B->AC
                 B->ACK(K的first集含有@)
