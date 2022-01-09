@@ -1,4 +1,3 @@
-
 #include "First.h"
 #include "Follow.h"
 #include "Table.h"
@@ -11,8 +10,9 @@ int main(){
     Grammar G;
     //文法输入
     G.inputGrammar();
-    cout<<"文法规格化后为：\n";
+    cout<<"\n文法规格化后为：\n";
     G.printGrammar();
+
     //消除左递归
     cout<<"\n消除左递归后文法为：\n";
     G.removeLeftRecursion();
@@ -35,10 +35,11 @@ int main(){
 
     //对输入的句子进行语法分析
     Analyse analyse;
-    cout<<"\n请输入您想要分析的句子：\n";
     string seq;
-    cin>>seq;
-    analyse.check(analyse.AnalyseSequence(G, table, seq));
-
-
+    while(1){
+        cout<<"\n请输入您想要分析的句子：(输入0结束)\n";
+        cin>>seq;
+        if(seq=="0")break;
+        analyse.check(analyse.AnalyseSequence(G, table, seq));
+    }
 }
