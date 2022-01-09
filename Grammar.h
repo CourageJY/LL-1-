@@ -46,7 +46,7 @@ private:
 
     //终结符集合
     set<char> Vt;
-    
+
     //用于存储文法的map映射表
     map<char, set<string>> Gr;
 
