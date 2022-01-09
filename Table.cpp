@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 #include "Table.h"
 
 void Table::getTable(Grammar &G, First &ft, Follow &fw) {
@@ -65,8 +66,8 @@ void Table::printTable(Grammar& G){
     /*
         显示Table
     */
-    set<char>Vn = G.getVn(); // 非终结符
-    set<char>Vt = G.getVt(); // 终结符
+    const set<char>&Vn = G.getVn(); // 非终结符
+    const set<char>&Vt = G.getVt(); // 终结符
 
     cout << "\n显示table表：" << endl;
     cout.setf(std::ios::left);
@@ -75,13 +76,51 @@ void Table::printTable(Grammar& G){
         cout << setw(10) << *it1;
     }
     cout << endl;
-    for (auto it = Vn.begin(); it != Vn.end(); it++) {
+    for (char it : Vn) {
         for (auto it1 = Vt_temp.begin(); it1 != Vt_temp.end(); it1++) {
-            string TableLeft="";
-            if (it1 == Vt_temp.begin())cout << setw(10) << *it;
-            TableLeft =TableLeft+ *it + *it1;
-            cout << *it << "->" << setw(7) << Table[TableLeft];
+            string TableLeft;
+            if (it1 == Vt_temp.begin())cout << setw(10) << it;
+            TableLeft =TableLeft+ it + *it1;
+            cout << it << "->" << setw(7) << Table[TableLeft];
         }
         cout << endl;
     }
+}
+
+bool Table::checkGrammar(Grammar& G,First& ft,Follow& fw) {
+    //判断每个非终结符的first和follow是否有交集
+    for(auto& v:G.Vn){
+        //交集运算
+        set<char> merge;
+        set<char> first=ft.FIRST[v];
+        set<char> follow=fw.FOLLOW[v];
+        set_intersection(first.begin(),first.end(),
+                         follow.begin(),follow.end(),
+                         inserter(merge,merge.begin()));
+        if(!merge.empty()){
+            return false;
+        }
+    }
+
+    //判断每个产生式的first之间是否有交集
+    for(auto& v:G.Vn){
+        for(auto it1=G.Gr[v].begin();it1!=G.Gr[v].end();it1++){
+            for(auto it2=it1;it2!=G.Gr[v].end();){
+                it2++;
+                if(it2==G.Gr[v].end())break;//边界判断
+                string str1=*it1;
+                string str2=*it2;
+                set<char> A=ft.getSeqFirst(str1);
+                set<char> B=ft.getSeqFirst(str2);
+                set<char> C;
+                set_intersection(A.begin(),A.end(),
+                                 B.begin(),B.end(),
+                                 inserter(C,C.begin()));
+                if(!C.empty()){
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
 }

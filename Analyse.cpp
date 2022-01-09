@@ -69,7 +69,7 @@
  /* 取出预测分析表对应的项中的产生式 */
  void Analyse::getFromTable(char A, char a, string &s,Table &T)
  {
-     string tableLeft="";
+     string tableLeft;
      tableLeft=tableLeft+A+a;
      s = T.Table[tableLeft];
  }

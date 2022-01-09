@@ -16,6 +16,9 @@ public:
      */
     void generateFirst(Grammar& G);
 
+    //得到某个句型的first集合
+    set<char> getSeqFirst(string seq);
+
     void printFirst(Grammar &G);
 
     const map<char, set<char>> &getFirst() const;

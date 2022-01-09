@@ -22,6 +22,9 @@ public:
 
     void printTable(Grammar& G);
 
+    //判断是否为LL(1)文法[检查first集合之间以及first与follow之间的交集是否都为空]
+    bool checkGrammar(Grammar& G,First& ft,Follow& fw);
+
 private:
     /**
      * 用以储存分析预测表的map
@@ -33,7 +36,7 @@ private:
     //may be public
     set<char>Vt_temp;
 
-    map<char, set<string> > P; //
+    map<char, set<string> > P;
     
     friend class Analyse;
 };

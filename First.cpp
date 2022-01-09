@@ -48,3 +48,14 @@ void First::printFirst(Grammar &G) {
         cout << endl;
     }
 }
+
+set<char> First::getSeqFirst(string seq){
+    set<char> ans;
+    if(isupper(seq[0])){//大写
+        return FIRST[seq[0]];
+    }
+    else{//小写
+        ans.insert(seq[0]);
+        return ans;
+    }
+}

@@ -2,7 +2,7 @@
 #include "Follow.h"
 #include "Table.h"
 #include "Analyse.h"
-#include "iostream"
+#include <iostream>
 
 using namespace std;
 
@@ -33,15 +33,21 @@ int main(){
     follow.generateFollow(G);
     follow.printFollow(G);
 
-    //计算预测分析表
+
     Table table;
+    //判断是否已为LL(1)文法
+    if(!table.checkGrammar(G,first,follow)){
+        cout<<"\n当前文法还不是LL(1)文法\n";
+        exit(1);
+    }
+    //计算预测分析表
     table.getTable(G,first,follow);
     table.printTable(G);
 
     //对输入的句子进行语法分析
     Analyse analyse;
     string seq;
-    while(1){
+    while(true){
         cout<<"\n请输入您想要分析的句子：(输入0结束)\n";
         cin>>seq;
         if(seq=="0")break;
